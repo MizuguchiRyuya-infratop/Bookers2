@@ -10,13 +10,13 @@
       </div>
 
       <div class="field">
-        <%= f.label :image %>
-        <%= f.file_field :image %>
+        <%= f.label :profile_image %>
+        <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
       </div>
 
       <div class="field">
-        <%= f.label :name %>
-        <%= f.text_area :name %>
+        <%= f.label :introduction %>
+        <%= f.text_area :introduction %>
       </div>
 
       <div class="actions">
