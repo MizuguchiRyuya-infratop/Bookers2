@@ -4,26 +4,26 @@
     <div class="row">
       <div class="col-xs-3">
         <h2>User info</h2>
-        <img class="attachment user profile_image fallback" src="/assets/no_image-ede28af4bad96368ef41be1b4be1cffce0d9402540f75d17895e32cb0d2af5e6.jpg" alt="No image">
+        <%= attachment_image_tag current_user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
         <table class="table">
           <tbody>
             <tr>
             </tr>
             <tr>
-          	  <th>name</th>
-          	  <th>サンプル</th>
+              <th>name</th>
+              <th><%= current_user.name %></th>
             </tr>
             <tr>
-          	  <th>introduction</th>
-          	  <th></th>
+              <th>introduction</th>
+              <th><%= current_user.introduction %></th>
             </tr>
           </tbody>
         </table>
         <div class="row">
-          <a class="col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_15876" href="/users/15876/edit"></a>
+          <%= link_to '', edit_user_path(current_user.id), class: 'col-xs-12 btn btn-default glyphicon glyphicon-wrench' %>
         </div>
         <h2>New book</h2>
-        <%= form_for @book do |f| %>
+        <%= form_for @new_book do |f| %>
           <%= render 'layouts/error_messages', model: f.object %>
           <div class="field row">
             <%= f.label :title %>
@@ -46,23 +46,24 @@
           <tbody>
             <tr>
               <td>
-                <a href="/users/15876">
-                  <img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" alt="No image icon"><br>
-                サンプル
-                </a>
+                <%= link_to user_path(@book.user.id) do %>
+                  <%= attachment_image_tag @book.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg" %>
+                <% end %>
               </td>
               <td>
-                <a href="/books/25750">dd,sp,dp,dpa</a>
+                <%= link_to @book.title, book_path(@book.id) %>
               </td>
               <td>
-                lfmdalmdal;sa;dda
+                <%= @book.body %>
               </td>
-              <td>
-                <a class="btn-sm btn-success edit_book_25750" href="/books/25750/edit">Edit</a>
-              </td>
-              <td>
-                <a data-confirm="本当に消しますか？" class="btn-sm btn-danger destroy_book_25750" rel="nofollow" data-method="delete" href="/books/25750">Destroy</a>
-              </td>
+              <% if current_user.id == @book.user.id %>
+                <td>
+                  <%= link_to 'Edit', edit_book_path(@book.id), class: 'btn-sm btn-success' %>
+                </td>
+                <td>
+                  <%= link_to 'Destroy', book_path(@book.id), class: 'btn-sm btn-danger', method: :delete, data: {confirm: "本当に消しますか？"} %>
+                </td>
+              <% end %>
             </tr>
           </tbody>
         </table>
