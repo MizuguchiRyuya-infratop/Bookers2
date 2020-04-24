@@ -1,0 +1,28 @@
+<div class="body">
+  <div class="container">
+    <p id="notice"></p>
+    <h2>User info</h2>
+    <%= form_for @user do |f| %>
+
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :image %>
+        <%= f.file_field :image %>
+      </div>
+
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_area :name %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit 'Update User', data: { disable_with: "Updating..." } %>
+      </div>
+
+    <% end %>
+  </div>
+</div>
