@@ -1,0 +1,75 @@
+<div class="body">
+  <div class="container">
+    <p id="notice"></p>
+    <p>You have creatad book successfully.</p>
+    <div class="row">
+      <div class="col-xs-3">
+        <h2>User info</h2>
+        <img class="attachment user profile_image fallback" src="/assets/no_image-ede28af4bad96368ef41be1b4be1cffce0d9402540f75d17895e32cb0d2af5e6.jpg" alt="No image">
+        <table class="table">
+          <tbody>
+            <tr>
+            </tr>
+            <tr>
+              <th>name</th>
+              <th><%= @user.name %></th>
+            </tr>
+            <tr>
+              <th>introduction</th>
+              <th><%= @user.introduction %></th>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <a class="col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_15959" href="/users/15959/edit"></a>
+        </div>
+        <h2>New book</h2>
+        <%= form_for @book do |f| %>
+          <%= render 'layouts/error_messages', model: f.object %>
+          <div class="field row">
+            <%= f.label :title %>
+            <%= f.text_field :title, class: 'col-xs-12 book_title' %>
+          </div>
+
+          <div class="field row">
+            <%= f.label :body %>
+            <%= f.text_area :body, class: 'col-xs-12 book_body' %>
+          </div>
+
+          <div class="actions row">
+            <%= f.submit 'Create Book', class: 'btn btn-primary col-xs-12', data: { disable_with: "Creating..." } %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-xs-9">
+        <h2>Book detail</h2>
+        <table class="table">
+          <% @books.each do |book| %>
+            <tbody>
+              <tr>
+                <td>
+                  <a href="/users/15959">
+                  <img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" alt="No image icon"><br>
+                  bbb
+                  </a>
+                </td>
+                <td>
+                  <a href="/books/25880">fdsfdっsd</a>
+                </td>
+                <td>
+                  vdsvdsvッ
+                </td>
+                <td>
+                  <a class="btn-sm btn-success edit_book_25880" href="/books/25880/edit">Edit</a>
+                </td>
+                <td>
+                  <a data-confirm="本当に消しますか？" class="btn-sm btn-danger destroy_book_25880" rel="nofollow" data-method="delete" href="/books/25880">Destroy</a>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
