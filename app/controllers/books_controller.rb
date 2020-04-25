@@ -42,7 +42,7 @@ class BooksController < ApplicationController
 
 	def destroy
 		book = Book.find(params[:id])
-		redirect_not_match_user(@book.user.id)
+		redirect_not_match_user(book.user.id)
 		if book.destroy
 			flash[:success] = 'successfully: 削除しました'
 			redirect_to books_path
