@@ -19,8 +19,8 @@ class UsersController < ApplicationController
 
 	def update
 		@user = User.find(params[:id])
-		redirect_not_match_user(@user.id)
 		if @user.update(user_params)
+			flash[:success] = 'You have updated user successfully.'
 			redirect_to user_path(@user.id)
 		else
 			render 'edit'
@@ -34,6 +34,6 @@ class UsersController < ApplicationController
 	end
 
 	def redirect_not_match_user(user_id)
-		redirect_to root_path if current_user.id != user_id
+		redirect_to user_path(current_user.id) if current_user.id != user_id
 	end
 end
