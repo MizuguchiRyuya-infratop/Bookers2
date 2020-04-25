@@ -26,12 +26,14 @@ class BooksController < ApplicationController
 
 	def edit
 		@book = Book.find(params[:id])
+		redirect_not_match_user(@book.user.id)
 	end
 
 	def update
 		@book = Book.find(params[:id])
-		raise StandardError if current_user.id != @book.user.id
+		redirect_not_match_user(@book.user.id)
 		if @book.update(book_params)
+			flash[:success] = 'You have updated book successfully.'
 			redirect_to book_path(@book.id)
 		else
 			render 'edit'
@@ -40,7 +42,7 @@ class BooksController < ApplicationController
 
 	def destroy
 		book = Book.find(params[:id])
-		raise StandardError if current_user.id != book.user.id
+		redirect_not_match_user(@book.user.id)
 		if book.destroy
 			flash[:success] = 'successfully: 削除しました'
 			redirect_to books_path
@@ -54,5 +56,9 @@ class BooksController < ApplicationController
 
 	def book_params
 		params.require(:book).permit(:title, :body).merge(user_id: current_user.id)
+	end
+
+	def redirect_not_match_user(user_id)
+		redirect_to books_path if current_user.id != user_id
 	end
 end
