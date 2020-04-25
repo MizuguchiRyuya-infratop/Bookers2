@@ -1,0 +1,23 @@
+<% flash.each do |message_type, message| %>
+    <div class="alert-<%= message_type %>">
+      <%= message %>
+    </div>
+<% end %>
+
+<style type="text/css" media="screen">
+	.alert-success {
+		background-color: #90ee90;
+	}
+
+	.alert-notice {
+		background-color: #add8e6;
+	}
+
+	.alert-warning {
+		background-color: #f0e68c;
+	}
+
+	.alert-danger {
+		background-color: #f08080;
+	}
+</style>
