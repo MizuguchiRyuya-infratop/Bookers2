@@ -3,6 +3,7 @@
     <p id="notice"></p>
     <h2>User info</h2>
     <%= form_for @user do |f| %>
+      <%= render partial: 'layouts/error_messages', locals: {model: f.object} %>
 
       <div class="field">
         <%= f.label :name %>

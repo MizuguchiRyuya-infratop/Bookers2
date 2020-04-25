@@ -1,45 +1,10 @@
 <div class="body">
   <div class="container">
     <p id="notice"></p>
+    <%= render partial: 'layouts/error_messages', locals: {model: @new_book} %>
+    <%= render partial: 'layouts/flash_message' %>
     <div class="row">
-      <div class="col-xs-3">
-        <h2>User info</h2>
-        <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
-        <table class="table">
-          <tbody>
-            <tr>
-            </tr>
-            <tr>
-              <th>name</th>
-              <th><%= @user.name %></th>
-            </tr>
-            <tr>
-              <th>introduction</th>
-              <th><%= @user.introduction %></th>
-            </tr>
-          </tbody>
-        </table>
-        <div class="row">
-          <%= link_to '', edit_user_path(@user.id), class: 'col-xs-12 btn btn-default glyphicon glyphicon-wrench' %>
-        </div>
-        <h2>New book</h2>
-        <%= form_for @new_book do |f| %>
-          <%= render 'layouts/error_messages', model: f.object %>
-          <div class="field row">
-            <%= f.label :title %>
-            <%= f.text_field :title, class: 'col-xs-12 book_title' %>
-          </div>
-
-          <div class="field row">
-            <%= f.label :body %>
-            <%= f.text_area :body, class: 'col-xs-12 book_body' %>
-          </div>
-
-          <div class="actions row">
-            <%= f.submit 'Create Book', class: 'btn btn-primary col-xs-12', data: { disable_with: "Creating..." } %>
-          </div>
-        <% end %>
-      </div>
+      <%= render partial: "layouts/current_user", locals: { new_book: @new_book }%>
       <div class="col-xs-9">
         <h2>Books</h2>
         <table class="table table-hover table-inverse">

@@ -14,10 +14,10 @@ class BooksController < ApplicationController
 	end
 
 	def create
-		book = Book.new(book_params)
-		if book.save
-			flash.now[:success] = 'successfully'
-			redirect_to book_path(book.id)
+		@new_book = Book.new(book_params)
+		if @new_book.save
+			flash[:success] = 'You have creatad book successfully.'
+			redirect_to book_path(@new_book.id)
 		else
 			@books = Book.all
 			render 'index'
@@ -42,10 +42,10 @@ class BooksController < ApplicationController
 		book = Book.find(params[:id])
 		raise StandardError if current_user.id != book.user.id
 		if book.destroy
-			flash.now[:success] = '削除しました'
+			flash[:success] = 'successfully: 削除しました'
 			redirect_to books_path
 		else
-			flash.now[:danger] = '削除できませんでした'
+			flash[:danger] = 'error: 削除できませんでした'
 			redirect_to books_path
 		end
 	end
