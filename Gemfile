@@ -70,3 +70,6 @@ gem 'devise'
 # 画像投稿系
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
+
+# jquery
+gem "jquery-rails"
