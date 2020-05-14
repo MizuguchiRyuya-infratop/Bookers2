@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :books
   has_many :favorites, dependent: :destroy
   has_many :favorited_books, through: :favorites, source: :book
+  has_many :book_comments
+  has_many :book_commented_books, through: :book_comments, source: :book
   attachment :profile_image
 
   validates :name, length: { minimum: 2 }
